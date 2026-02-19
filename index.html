@@ -1,163 +1,1002 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abhishek Gupta | Logistics & Operations</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Builder (A4) - Professional</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* Your theme */
+      --section-bg:#F4F7F9;
+      --header-text:#1A252F;
+      --divider:#DDE6ED;
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+      --paper:#ffffff;
+      --ink:#111827;
+      --muted:#556271;
 
-body{background:#f5f7fb;color:#1e293b;}
+      --btn:#ffffff;
+      --btn-hover:#f6f9fb;
+      --btn-border:#DDE6ED;
 
-/* NAVBAR */
-nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 60px;
-  background:#fff;
-  box-shadow:0 5px 20px rgba(0,0,0,0.05);
-}
+      --primary:#2563eb;
+      --primary-soft:rgba(37,99,235,.12);
 
-nav h2{color:#2563eb;}
-nav a{margin-left:20px;text-decoration:none;color:#475569;font-size:14px;}
+      --danger:#ef4444;
+      --danger-soft:rgba(239,68,68,.12);
+    }
 
-/* HERO */
-.hero{
-  display:flex;
-  align-items:center;
-  padding:80px 60px;
-}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:#eef2f5;
+      color:var(--ink);
+      padding:16px;
+    }
 
-.hero-left h1{font-size:42px;margin-bottom:10px;}
-.hero-left h3{color:#2563eb;margin-bottom:15px;}
-.hero-left p{max-width:500px;color:#64748b;}
+    /* A4 printing */
+    @page{ size:A4; margin:10mm; }
 
-.hero-actions{
-  margin-top:20px;
-  display:flex;
-  gap:10px;
-}
+    /* Top app bar */
+    .appbar{
+      max-width: 1150px;
+      margin: 0 auto 12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
 
-/* BUTTON */
-.btn{
-  padding:12px 20px;
-  background:#2563eb;
-  color:#fff;
-  border-radius:8px;
-  text-decoration:none;
-  border:none;
-  cursor:pointer;
-}
+      background:rgba(255,255,255,.85);
+      border:1px solid var(--divider);
+      border-radius:14px;
+      padding:10px;
+      backdrop-filter: blur(8px);
+    }
 
-.btn:hover{
-  background:#1e40af;
-}
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .brand b{
+      color:var(--header-text);
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .brand span{
+      font-size:12px;
+      color:var(--muted);
+    }
 
-/* SECTION */
-.section{padding:60px;}
-.section h2{margin-bottom:30px;color:#2563eb;}
+    .btnRow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
+    .btn{
+      appearance:none;
+      border:1px solid var(--btn-border);
+      background:var(--btn);
+      color:var(--header-text);
+      padding:9px 11px;
+      border-radius:12px;
+      font-weight:800;
+      font-size:12px;
+      cursor:pointer;
+      transition: background .15s ease, transform .06s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .btn:hover{ background:var(--btn-hover); border-color:#cfd8df; }
+    .btn:active{ transform: translateY(1px); }
 
-.card{
-  background:#fff;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.05);
-}
+    .btn.primary{
+      border-color: rgba(37,99,235,.30);
+      background: var(--primary-soft);
+      color:#1e40af;
+    }
 
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  background:#fff;
-  margin-top:40px;
-}
-</style>
+    .btn.danger{
+      border-color: rgba(239,68,68,.35);
+      background: var(--danger-soft);
+      color:#991b1b;
+    }
+
+    /* Resume sheet */
+    .sheet{
+      width:210mm;
+      min-height:297mm;
+      margin:0 auto;
+      background:var(--paper);
+      border:1px solid var(--divider);
+      box-shadow:0 18px 50px rgba(0,0,0,.10);
+      overflow:hidden;
+
+      display:grid;
+      grid-template-columns:72mm 1fr;
+    }
+
+    /* Left */
+    .left{
+      background:var(--section-bg);
+      border-right:1px solid var(--divider);
+      padding:15mm 10mm;
+    }
+
+    /* Right */
+    .right{
+      padding:15mm 12mm;
+    }
+
+    /* Editable */
+    [contenteditable="true"]{
+      outline:none;
+      border-radius:8px;
+      padding:2px 2px;
+    }
+    [contenteditable="true"]:focus{
+      box-shadow:0 0 0 2px rgba(37,99,235,.20);
+      background: rgba(37,99,235,.06);
+    }
+
+    /* Header left */
+    .name{
+      font-size:22px;
+      font-weight:900;
+      line-height:1.1;
+      color:var(--header-text);
+    }
+    .headline{
+      margin-top:6px;
+      font-size:12.8px;
+      font-weight:800;
+      color:var(--muted);
+      line-height:1.35;
+    }
+
+    .contact{
+      margin-top:14px;
+      padding-top:12px;
+      border-top:1px solid var(--divider);
+      display:grid;
+      gap:8px;
+      font-size:12.3px;
+      color:#2b3640;
+    }
+
+    /* Section titles */
+    .sideSection{ margin-top:16px; }
+    .sideTitle{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:8px;
+
+      font-size:12px;
+      font-weight:900;
+      color:var(--header-text);
+      text-transform:uppercase;
+      letter-spacing:.28px;
+
+      padding-bottom:6px;
+      border-bottom:2px solid var(--divider);
+      margin-bottom:10px;
+    }
+
+    .chips{
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .chip{
+      background:#fff;
+      border:1px solid var(--divider);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:11.5px;
+      color:#22303b;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      line-height:1;
+    }
+    .chip button{
+      border:none;
+      background:transparent;
+      color:#64748b;
+      cursor:pointer;
+      font-weight:900;
+      font-size:12px;
+      padding:0;
+    }
+    .chip button:hover{ color:#0f172a; }
+
+    .sideText{
+      font-size:12.4px;
+      color:#2f3b46;
+      line-height:1.55;
+    }
+
+    /* Right sections */
+    .section{ margin-bottom:14px; }
+    .sectionHead{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .sectionHead h2{
+      font-size:13px;
+      font-weight:1000;
+      color:var(--header-text);
+      text-transform:uppercase;
+      letter-spacing:.28px;
+      white-space:nowrap;
+    }
+    .line{ flex:1; height:2px; background:var(--divider); border-radius:999px; }
+
+    .summary{
+      font-size:12.7px;
+      color:#34424f;
+      line-height:1.6;
+    }
+
+    /* Entry cards */
+    .entry{
+      border-left:2px solid var(--divider);
+      padding-left:10px;
+      margin-top:10px;
+    }
+    .entryTop{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .entryTitle{
+      font-size:12.8px;
+      font-weight:900;
+      color:#0f172a;
+    }
+    .entrySub{
+      display:block;
+      margin-top:2px;
+      font-size:12.1px;
+      font-weight:800;
+      color:#475569;
+    }
+    .entryMeta{
+      font-size:11.6px;
+      font-weight:800;
+      color:#64748b;
+      white-space:nowrap;
+    }
+    ul{
+      margin:6px 0 0 18px;
+      font-size:12.4px;
+      color:#334155;
+      line-height:1.5;
+    }
+    li{ margin:3px 0; }
+
+    /* Custom section block (both left/right) */
+    .customSection{
+      margin-top:12px;
+      border:1px solid var(--divider);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .customSection .head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      padding:10px 10px;
+      background: var(--section-bg);
+      border-bottom:1px solid var(--divider);
+    }
+    .customSection .head b{
+      color:var(--header-text);
+      text-transform:uppercase;
+      letter-spacing:.28px;
+      font-size:12px;
+      font-weight:1000;
+    }
+    .customSection .head button{
+      border:1px solid rgba(239,68,68,.35);
+      background: var(--danger-soft);
+      color:#991b1b;
+      border-radius:10px;
+      padding:6px 8px;
+      font-weight:1000;
+      font-size:11px;
+      cursor:pointer;
+    }
+    .customSection .content{
+      padding:10px;
+      font-size:12.5px;
+      line-height:1.55;
+      color:#2f3b46;
+    }
+    .customSection .content[contenteditable="true"]{
+      padding:10px;
+    }
+
+    /* Modal */
+    .modalBack{
+      position:fixed; inset:0;
+      background: rgba(15,23,42,.40);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:14px;
+      z-index:9999;
+    }
+    .modal{
+      width:min(560px, 100%);
+      background:#fff;
+      border-radius:16px;
+      border:1px solid var(--divider);
+      box-shadow:0 30px 90px rgba(0,0,0,.30);
+      overflow:hidden;
+    }
+    .modalHeader{
+      padding:12px 14px;
+      background: var(--section-bg);
+      border-bottom:1px solid var(--divider);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .modalHeader b{
+      color:var(--header-text);
+      font-size:13px;
+      font-weight:1000;
+      letter-spacing:.2px;
+    }
+    .modalBody{ padding:14px; display:grid; gap:10px; }
+    .field{ display:grid; gap:6px; }
+    .field label{ font-size:12px; font-weight:900; color:var(--header-text); }
+    .field input, .field textarea, .field select{
+      width:100%;
+      border:1px solid var(--divider);
+      border-radius:12px;
+      padding:10px 10px;
+      font-size:13px;
+      outline:none;
+      background:#fff;
+    }
+    .field textarea{ min-height:120px; resize:vertical; line-height:1.5; }
+    .modalFooter{
+      padding:12px 14px;
+      border-top:1px solid var(--divider);
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+      background:#fff;
+    }
+
+    /* Print */
+    @media print{
+      body{ background:#fff; padding:0; }
+      .appbar, .modalBack{ display:none !important; }
+      .sheet{ box-shadow:none; border:none; margin:0; }
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .sheet{ width:100%; grid-template-columns:1fr; min-height:auto; }
+      .left{ border-right:none; border-bottom:1px solid var(--divider); }
+    }
+  </style>
 </head>
 
 <body>
-
-<nav>
-  <h2>Abhishek Gupta</h2>
-  <div>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
-<section class="hero">
-  <div class="hero-left">
-    <h1>Hi, I'm Abhishek Gupta</h1>
-    <h3>Logistics & Supply Chain Specialist</h3>
-
-    <p>
-      Results-driven logistics professional with experience in supply chain operations,
-      cost optimization, and automation.
-    </p>
-
-    <!-- FIXED BUTTONS -->
-    <div class="hero-actions">
-
-      <!-- VIEW RESUME -->
-      <button class="btn" onclick="viewResume()">📄 View Resume</button>
-
-      <!-- DOWNLOAD -->
-      <a href="Abhishek_Resume.pdf" class="btn" download>⬇️ Download</a>
-
+  <div class="appbar">
+    <div class="brand">
+      <b>Resume Builder</b>
+      <span>A4 • Offline • Add Sections (Left & Right) • Print PDF</span>
     </div>
 
+    <div class="btnRow">
+      <button class="btn primary" id="btnAddLeft">➕ Add LEFT Section</button>
+      <button class="btn primary" id="btnAddRight">➕ Add RIGHT Section</button>
+      <button class="btn" id="btnAddSkill">➕ Add Skill</button>
+      <button class="btn" id="btnAddExp">➕ Add Experience</button>
+      <button class="btn" id="btnAddProj">➕ Add Project</button>
+      <button class="btn" id="btnAddEdu">➕ Add Education</button>
+      <button class="btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+      <button class="btn danger" id="btnReset">Reset</button>
+    </div>
   </div>
-</section>
 
-<section class="section" id="about">
-  <h2>About Me</h2>
-  <p>2+ years experience in logistics, inventory and operations.</p>
-</section>
+  <section class="sheet" id="sheet">
+    <!-- LEFT -->
+    <aside class="left" id="leftCol">
+      <div class="name" contenteditable="true" data-k="name">Abhishek Gupta</div>
+      <div class="headline" contenteditable="true" data-k="headline">Logistics & Inventory Executive</div>
 
-<section class="section" id="skills">
-  <h2>Skills</h2>
-  <div class="grid">
-    <div class="card">Logistics</div>
-    <div class="card">Inventory</div>
-    <div class="card">Supply Chain</div>
+      <div class="contact">
+        <div contenteditable="true" data-k="phone">📞 +91 XXXXXXXXXX</div>
+        <div contenteditable="true" data-k="email">✉ yourmail@gmail.com</div>
+        <div contenteditable="true" data-k="location">📍 City, State, India</div>
+        <div contenteditable="true" data-k="link">🔗 linkedin.com/in/yourprofile</div>
+      </div>
+
+      <div class="sideSection">
+        <div class="sideTitle">
+          <span>Skills</span>
+          <span style="font-size:11px;color:var(--muted);font-weight:800;">(add/remove)</span>
+        </div>
+        <div class="chips" id="skillsWrap"></div>
+      </div>
+
+      <div class="sideSection">
+        <div class="sideTitle"><span>Tools</span></div>
+        <div class="sideText" contenteditable="true" data-k="tools">Excel • Google Sheets • TMS • Reporting • Basic Power BI</div>
+      </div>
+
+      <div class="sideSection">
+        <div class="sideTitle"><span>Strengths</span></div>
+        <div class="sideText" contenteditable="true" data-k="strengths">Problem solving • Cross-team coordination • Compliance focus • Process improvement</div>
+      </div>
+
+      <div id="leftCustomHost"></div>
+    </aside>
+
+    <!-- RIGHT -->
+    <main class="right" id="rightCol">
+      <section class="section">
+        <div class="sectionHead"><h2>Profile</h2><div class="line"></div></div>
+        <div class="summary" contenteditable="true" data-k="summary">
+          Logistics and inventory professional experienced in transportation coordination, warehouse operations, return handling,
+          and freight cost analysis. Skilled in compliance documentation, customer issue resolution, and improving operational
+          efficiency through reporting and process optimization.
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="sectionHead"><h2>Experience</h2><div class="line"></div></div>
+        <div id="expHost"></div>
+      </section>
+
+      <section class="section">
+        <div class="sectionHead"><h2>Projects</h2><div class="line"></div></div>
+        <div id="projHost"></div>
+      </section>
+
+      <section class="section">
+        <div class="sectionHead"><h2>Education</h2><div class="line"></div></div>
+        <div id="eduHost"></div>
+      </section>
+
+      <div id="rightCustomHost"></div>
+    </main>
+  </section>
+
+  <!-- MODAL -->
+  <div class="modalBack" id="modalBack" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modalHeader">
+        <b id="modalTitle">Add Section</b>
+        <button class="btn" id="btnCloseModal" type="button">✕ Close</button>
+      </div>
+
+      <div class="modalBody">
+        <div class="field">
+          <label>Where</label>
+          <select id="mWhere">
+            <option value="left">Left (Sidebar)</option>
+            <option value="right">Right (Main)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Section Type</label>
+          <select id="mType">
+            <option value="custom">Custom Section (Title + Content)</option>
+            <option value="experience">Experience (Title/Company/Dates/Bullets)</option>
+            <option value="project">Project (Name/Tech/Outcome/Bullets)</option>
+            <option value="education">Education (Degree/Institute/Year)</option>
+          </select>
+        </div>
+
+        <div class="field" id="mTitleWrap">
+          <label>Title</label>
+          <input id="mTitle" placeholder="e.g., Languages / Awards / Summary Highlights" />
+        </div>
+
+        <div class="field" id="mSubWrap">
+          <label>Subtitle</label>
+          <input id="mSub" placeholder="e.g., Company • Location" />
+        </div>
+
+        <div class="field" id="mMetaWrap">
+          <label>Meta (Dates / Link)</label>
+          <input id="mMeta" placeholder="e.g., 2022–2025" />
+        </div>
+
+        <div class="field" id="mContentWrap">
+          <label>Content / Bullets</label>
+          <textarea id="mContent" placeholder="Write bullets (one per line)&#10;Example: Reduced freight costs by 12% using rate analysis"></textarea>
+          <div style="font-size:12px;color:var(--muted);line-height:1.4;">
+            Tip: Write one point per line. It will be converted into bullet points automatically for professional formatting.
+          </div>
+        </div>
+      </div>
+
+      <div class="modalFooter">
+        <button class="btn" id="btnCancel" type="button">Cancel</button>
+        <button class="btn primary" id="btnCreate" type="button">Create</button>
+      </div>
+    </div>
   </div>
-</section>
 
-<section class="section" id="projects">
-  <h2>Projects</h2>
-  <div class="grid">
-    <div class="card">Inventory System</div>
-    <div class="card">Automation Tool</div>
-  </div>
-</section>
+  <script>
+    /* =========================
+       STATE + STORAGE
+       ========================= */
+    const STORE_KEY = "resume_builder_professional_v1";
 
-<section class="section" id="contact">
-  <h2>Contact</h2>
-  <p>Email: abhishekguptamzp1512@gmail.com</p>
-</section>
+    const state = {
+      basics: {
+        name: "Abhishek Gupta",
+        headline: "Logistics & Inventory Executive",
+        phone: "📞 +91 XXXXXXXXXX",
+        email: "✉ yourmail@gmail.com",
+        location: "📍 City, State, India",
+        link: "🔗 linkedin.com/in/yourprofile",
+        tools: "Excel • Google Sheets • TMS • Reporting • Basic Power BI",
+        strengths: "Problem solving • Cross-team coordination • Compliance focus • Process improvement",
+        summary:
+          "Logistics and inventory professional experienced in transportation coordination, warehouse operations, return handling, " +
+          "and freight cost analysis. Skilled in compliance documentation, customer issue resolution, and improving operational " +
+          "efficiency through reporting and process optimization."
+      },
+      skills: [
+        "Logistics Management",
+        "Inventory Control",
+        "Warehouse Operations",
+        "TMS",
+        "Freight Cost Analysis",
+        "MS Excel",
+        "Google Sheets"
+      ],
+      experience: [],
+      projects: [],
+      education: [],
+      customLeft: [],
+      customRight: []
+    };
 
-<footer>
-  © 2026 Abhishek Gupta
-</footer>
+    function save(){
+      try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
+    }
+    function load(){
+      try{
+        const raw = localStorage.getItem(STORE_KEY);
+        if(!raw) return;
+        const parsed = JSON.parse(raw);
+        if(!parsed || typeof parsed !== "object") return;
 
-<!-- JAVASCRIPT -->
-<script>
-function viewResume() {
-  window.open("Abhishek_Resume.pdf", "_blank");
-}
-</script>
+        // shallow merge safely
+        if(parsed.basics) Object.assign(state.basics, parsed.basics);
+        if(Array.isArray(parsed.skills)) state.skills = parsed.skills;
+        if(Array.isArray(parsed.experience)) state.experience = parsed.experience;
+        if(Array.isArray(parsed.projects)) state.projects = parsed.projects;
+        if(Array.isArray(parsed.education)) state.education = parsed.education;
+        if(Array.isArray(parsed.customLeft)) state.customLeft = parsed.customLeft;
+        if(Array.isArray(parsed.customRight)) state.customRight = parsed.customRight;
+      }catch(e){}
+    }
 
+    /* =========================
+       RENDER HELPERS
+       ========================= */
+    const $ = (id) => document.getElementById(id);
+
+    function escapeHtml(str){
+      return (str ?? "").toString().replace(/[&<>"']/g, m => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"
+      }[m]));
+    }
+
+    function linesToBullets(text){
+      const t = (text ?? "").toString().replace(/\r/g,"").trim();
+      if(!t) return [];
+      return t.split("\n").map(s=>s.trim()).filter(Boolean).slice(0, 8);
+    }
+
+    function renderSkills(){
+      const wrap = $("skillsWrap");
+      wrap.innerHTML = "";
+      state.skills.forEach((skill, idx) => {
+        const chip = document.createElement("div");
+        chip.className = "chip";
+        chip.innerHTML = `
+          <span contenteditable="true" data-skill="${idx}">${escapeHtml(skill)}</span>
+          <button type="button" title="Remove">×</button>
+        `;
+        chip.querySelector("button").addEventListener("click", () => {
+          state.skills.splice(idx,1);
+          save(); renderSkills();
+        });
+        wrap.appendChild(chip);
+      });
+    }
+
+    function renderEntries(hostId, arr, type){
+      const host = $(hostId);
+      host.innerHTML = "";
+
+      arr.forEach((it, idx) => {
+        const bullets = linesToBullets(it.bullets || "");
+        const entry = document.createElement("div");
+        entry.className = "entry";
+        entry.innerHTML = `
+          <div class="entryTop">
+            <div>
+              <div class="entryTitle" contenteditable="true" data-${type}-title="${idx}">${escapeHtml(it.title || "")}</div>
+              <span class="entrySub" contenteditable="true" data-${type}-sub="${idx}">${escapeHtml(it.sub || "")}</span>
+            </div>
+            <div class="entryMeta" contenteditable="true" data-${type}-meta="${idx}">${escapeHtml(it.meta || "")}</div>
+          </div>
+          ${bullets.length ? `<ul>${bullets.map(b => `<li contenteditable="true">${escapeHtml(b)}</li>`).join("")}</ul>` : `<ul contenteditable="true"><li>Write your bullet points here...</li></ul>`}
+          <div style="margin-top:8px; display:flex; gap:8px;">
+            <button class="btn danger" type="button" data-del="${type}" data-idx="${idx}">Remove</button>
+          </div>
+        `;
+        host.appendChild(entry);
+      });
+    }
+
+    function renderCustom(where){
+      const host = where === "left" ? $("leftCustomHost") : $("rightCustomHost");
+      const arr  = where === "left" ? state.customLeft : state.customRight;
+      host.innerHTML = "";
+
+      arr.forEach((sec, idx) => {
+        const box = document.createElement("div");
+        box.className = "customSection";
+        box.innerHTML = `
+          <div class="head">
+            <b contenteditable="true" data-custom-${where}-title="${idx}">${escapeHtml(sec.title || "Section")}</b>
+            <button type="button" data-custom-del="${where}" data-idx="${idx}">Remove</button>
+          </div>
+          <div class="content" contenteditable="true" data-custom-${where}-content="${idx}">${escapeHtml(sec.content || "")}</div>
+        `;
+        host.appendChild(box);
+      });
+    }
+
+    function renderBasics(){
+      document.querySelectorAll("[data-k]").forEach(el => {
+        const key = el.getAttribute("data-k");
+        if(key && state.basics[key] != null) el.textContent = state.basics[key];
+      });
+    }
+
+    function renderAll(){
+      renderBasics();
+      renderSkills();
+      renderEntries("expHost", state.experience, "exp");
+      renderEntries("projHost", state.projects, "proj");
+      renderEntries("eduHost", state.education, "edu");
+      renderCustom("left");
+      renderCustom("right");
+    }
+
+    /* =========================
+       BASIC EDIT SAVE (contenteditable)
+       ========================= */
+    function bindEditableSaving(){
+      // basics
+      document.addEventListener("input", (e) => {
+        const t = e.target;
+
+        if(t && t.matches("[data-k]")){
+          const key = t.getAttribute("data-k");
+          state.basics[key] = t.textContent.trim();
+          save();
+          return;
+        }
+
+        // skill edits
+        if(t && t.matches("[data-skill]")){
+          const idx = Number(t.getAttribute("data-skill"));
+          if(Number.isFinite(idx) && state.skills[idx] != null){
+            state.skills[idx] = t.textContent.trim();
+            save();
+          }
+          return;
+        }
+
+        // custom section edits
+        const customTitleLeft = t?.getAttribute?.("data-custom-left-title");
+        const customContentLeft = t?.getAttribute?.("data-custom-left-content");
+        const customTitleRight = t?.getAttribute?.("data-custom-right-title");
+        const customContentRight = t?.getAttribute?.("data-custom-right-content");
+
+        if(customTitleLeft != null){
+          const idx = Number(customTitleLeft);
+          if(state.customLeft[idx]){ state.customLeft[idx].title = t.textContent.trim(); save(); }
+          return;
+        }
+        if(customContentLeft != null){
+          const idx = Number(customContentLeft);
+          if(state.customLeft[idx]){ state.customLeft[idx].content = t.textContent; save(); }
+          return;
+        }
+        if(customTitleRight != null){
+          const idx = Number(customTitleRight);
+          if(state.customRight[idx]){ state.customRight[idx].title = t.textContent.trim(); save(); }
+          return;
+        }
+        if(customContentRight != null){
+          const idx = Number(customContentRight);
+          if(state.customRight[idx]){ state.customRight[idx].content = t.textContent; save(); }
+          return;
+        }
+
+        // experience/project/education edits (title/sub/meta)
+        const map = [
+          ["data-exp-title","experience","title"],
+          ["data-exp-sub","experience","sub"],
+          ["data-exp-meta","experience","meta"],
+          ["data-proj-title","projects","title"],
+          ["data-proj-sub","projects","sub"],
+          ["data-proj-meta","projects","meta"],
+          ["data-edu-title","education","title"],
+          ["data-edu-sub","education","sub"],
+          ["data-edu-meta","education","meta"],
+        ];
+
+        for(const [attr, listKey, field] of map){
+          const val = t?.getAttribute?.(attr);
+          if(val != null){
+            const idx = Number(val);
+            if(state[listKey]?.[idx]){
+              state[listKey][idx][field] = t.textContent.trim();
+              save();
+            }
+            return;
+          }
+        }
+      });
+
+      // remove entry buttons
+      document.addEventListener("click", (e) => {
+        const btn = e.target;
+        if(!(btn instanceof HTMLElement)) return;
+
+        // remove structured entries
+        const delType = btn.getAttribute("data-del");
+        const idx = Number(btn.getAttribute("data-idx"));
+        if(delType && Number.isFinite(idx)){
+          if(delType === "exp") state.experience.splice(idx,1);
+          if(delType === "proj") state.projects.splice(idx,1);
+          if(delType === "edu") state.education.splice(idx,1);
+          save(); renderAll();
+          return;
+        }
+
+        // remove custom sections
+        const cdel = btn.getAttribute("data-custom-del");
+        if(cdel){
+          const i = Number(btn.getAttribute("data-idx"));
+          if(Number.isFinite(i)){
+            if(cdel === "left") state.customLeft.splice(i,1);
+            if(cdel === "right") state.customRight.splice(i,1);
+            save(); renderAll();
+          }
+        }
+      });
+    }
+
+    /* =========================
+       MODAL LOGIC (NO PROMPTS)
+       ========================= */
+    function openModal(where, type){
+      $("modalBack").style.display = "flex";
+      $("modalBack").setAttribute("aria-hidden","false");
+      $("mWhere").value = where;
+      $("mType").value = type;
+
+      // reset fields
+      $("mTitle").value = "";
+      $("mSub").value = "";
+      $("mMeta").value = "";
+      $("mContent").value = "";
+
+      applyModalType();
+    }
+
+    function closeModal(){
+      $("modalBack").style.display = "none";
+      $("modalBack").setAttribute("aria-hidden","true");
+    }
+
+    function applyModalType(){
+      const t = $("mType").value;
+
+      // show/hide fields per type
+      const isCustom = t === "custom";
+      const isExp = t === "experience";
+      const isProj = t === "project";
+      const isEdu = t === "education";
+
+      $("mTitleWrap").style.display = "";
+      $("mSubWrap").style.display = (isEdu || isCustom) ? "none" : "";
+      $("mMetaWrap").style.display = isCustom ? "none" : "";
+      $("mContentWrap").style.display = isEdu ? "none" : "";
+
+      if(isCustom){
+        $("modalTitle").textContent = "Add Custom Section";
+        $("mTitle").placeholder = "e.g., Languages / Awards / Achievements";
+        $("mContent").placeholder = "Write your content here...";
+      } else if(isExp){
+        $("modalTitle").textContent = "Add Experience";
+        $("mTitle").placeholder = "Job Title";
+        $("mSub").placeholder = "Company • Location";
+        $("mMeta").placeholder = "Dates (e.g., 2022–2025)";
+        $("mContent").placeholder = "Bullets (one per line)\nExample: Reduced freight cost by 12% using bill verification";
+      } else if(isProj){
+        $("modalTitle").textContent = "Add Project";
+        $("mTitle").placeholder = "Project Name";
+        $("mSub").placeholder = "Tech / Role / Outcome";
+        $("mMeta").placeholder = "Link or Time (optional)";
+        $("mContent").placeholder = "Bullets (one per line)";
+      } else if(isEdu){
+        $("modalTitle").textContent = "Add Education";
+        $("mTitle").placeholder = "Degree / Course";
+        $("mMeta").placeholder = "Institute • Year";
+      }
+    }
+
+    function createFromModal(){
+      const where = $("mWhere").value;
+      const type = $("mType").value;
+
+      const title = $("mTitle").value.trim();
+      const sub = $("mSub").value.trim();
+      const meta = $("mMeta").value.trim();
+      const content = $("mContent").value.trim();
+
+      if(type === "custom"){
+        if(!title) { alert("Please enter a Title."); return; }
+        const sec = { title, content: content || "Add your details here..." };
+        (where === "left" ? state.customLeft : state.customRight).push(sec);
+      }
+
+      if(type === "experience"){
+        if(!title) { alert("Please enter Job Title."); return; }
+        state.experience.unshift({
+          title,
+          sub: sub || "Company • Location",
+          meta: meta || "Dates",
+          bullets: content || "Achievement 1\nAchievement 2\nAchievement 3"
+        });
+      }
+
+      if(type === "project"){
+        if(!title) { alert("Please enter Project Name."); return; }
+        state.projects.unshift({
+          title,
+          sub: sub || "Tech / Role / Outcome",
+          meta: meta || "",
+          bullets: content || "Built feature X\nImproved Y\nUsed Z"
+        });
+      }
+
+      if(type === "education"){
+        if(!title) { alert("Please enter Degree / Course."); return; }
+        state.education.unshift({
+          title,
+          sub: " ",
+          meta: meta || "Institute • Year",
+          bullets: ""
+        });
+      }
+
+      save();
+      renderAll();
+      closeModal();
+    }
+
+    /* =========================
+       BUTTON ACTIONS
+       ========================= */
+    function bindButtons(){
+      $("btnAddLeft").addEventListener("click", () => openModal("left","custom"));
+      $("btnAddRight").addEventListener("click", () => openModal("right","custom"));
+
+      $("btnAddExp").addEventListener("click", () => openModal("right","experience"));
+      $("btnAddProj").addEventListener("click", () => openModal("right","project"));
+      $("btnAddEdu").addEventListener("click", () => openModal("right","education"));
+
+      $("btnAddSkill").addEventListener("click", () => {
+        const name = prompt("Enter skill name:");
+        if(!name) return;
+        state.skills.push(name.trim());
+        save(); renderSkills();
+      });
+
+      $("btnReset").addEventListener("click", () => {
+        const ok = confirm("Reset everything? (This will clear saved data)");
+        if(!ok) return;
+        localStorage.removeItem(STORE_KEY);
+        location.reload();
+      });
+
+      $("btnCloseModal").addEventListener("click", closeModal);
+      $("btnCancel").addEventListener("click", closeModal);
+      $("mType").addEventListener("change", applyModalType);
+      $("btnCreate").addEventListener("click", createFromModal);
+
+      // close modal on backdrop click
+      $("modalBack").addEventListener("click", (e) => {
+        if(e.target === $("modalBack")) closeModal();
+      });
+
+      // ESC close
+      document.addEventListener("keydown", (e) => {
+        if(e.key === "Escape" && $("modalBack").style.display === "flex") closeModal();
+      });
+    }
+
+    /* =========================
+       INITIAL DEFAULT DATA
+       ========================= */
+    function ensureStarterBlocks(){
+      if(state.experience.length === 0){
+        state.experience.push({
+          title:"Logistics / Operations Executive",
+          sub:"Company Name • Warehouse & Dispatch",
+          meta:"2022 – Present",
+          bullets:
+`Coordinated dispatch, pickups, and shipment tracking with courier partners
+Verified logistics bills and analyzed freight costs to reduce billing errors
+Handled Amazon return shipments: QC, damaged goods handling, restocking & replacements
+Managed customer complaints and service queries with professional communication`
+        });
+        state.experience.push({
+          title:"Inventory / Support Associate",
+          sub:"Company Name • Inventory & Support",
+          meta:"2020 – 2022",
+          bullets:
+`Maintained inventory accuracy with stock control and reconciliation
+Prepared shipping documentation and ensured compliance with company policies
+Coordinated with Sales/Warehouse/Support teams for dispute and fraud case handling`
+        });
+      }
+
+      if(state.projects.length === 0){
+        state.projects.push({
+          title:"Inventory & Billing System",
+          sub:"Personal Project • Web App",
+          meta:"Ongoing",
+          bullets:
+`Designing modules for inventory in/out, returns, billing, and reporting workflow
+Goal: reduce manual entry, improve accuracy, and enable live data tracking`
+        });
+      }
+
+      if(state.education.length === 0){
+        state.education.push({
+          title:"Bachelor’s Degree / Diploma",
+          sub:" ",
+          meta:"Institute / University • Year",
+          bullets:""
+        });
+      }
+    }
+
+    /* =========================
+       BOOT
+       ========================= */
+    load();
+    ensureStarterBlocks();
+    renderAll();
+    bindEditableSaving();
+    bindButtons();
+  </script>
 </body>
 </html>
